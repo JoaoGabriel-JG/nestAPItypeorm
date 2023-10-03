@@ -12,14 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
-const prisma_service_1 = require("../prisma/prisma.service");
 const user_service_1 = require("../user/user.service");
 const bcrypt = require("bcrypt");
 const mailer_1 = require("@nestjs-modules/mailer");
 let AuthService = exports.AuthService = class AuthService {
-    constructor(jwtService, prisma, userService, mailer) {
+    constructor(jwtService, userService, mailer) {
         this.jwtService = jwtService;
-        this.prisma = prisma;
         this.userService = userService;
         this.mailer = mailer;
         this.issuer = 'login';
@@ -135,7 +133,6 @@ let AuthService = exports.AuthService = class AuthService {
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [jwt_1.JwtService,
-        prisma_service_1.PrismaService,
         user_service_1.UserService,
         mailer_1.MailerService])
 ], AuthService);

@@ -10,9 +10,10 @@ exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_controller_1 = require("./user.controller");
 const user_service_1 = require("./user.service");
-const prisma_module_1 = require("../prisma/prisma.module");
 const user_id_check_middleware_1 = require("../Middleware/user-id-check.middleware");
 const auth_module_1 = require("../auth/auth.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("./entity/user.entity");
 let UserModule = exports.UserModule = class UserModule {
     configure(consumer) {
         consumer.apply(user_id_check_middleware_1.UserIdCheckMiddleware).forRoutes({
@@ -23,7 +24,10 @@ let UserModule = exports.UserModule = class UserModule {
 };
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, (0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
+        imports: [
+            (0, common_1.forwardRef)(() => auth_module_1.AuthModule),
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.UserEntity])
+        ],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService],
         exports: [user_service_1.UserService]

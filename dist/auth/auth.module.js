@@ -11,20 +11,21 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const auth_controller_1 = require("./auth.controller");
 const user_module_1 = require("../user/user.module");
-const prisma_module_1 = require("../prisma/prisma.module");
 const auth_service_1 = require("./auth.service");
 const process = require("process");
 const file_module_1 = require("../file/file.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("../user/entity/user.entity");
 let AuthModule = exports.AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [jwt_1.JwtModule.register({
-                secret: process.env.JWT_SECRET
+                secret: process.env.JWT_SECRETs
             }),
             (0, common_1.forwardRef)(() => user_module_1.UserModule),
-            prisma_module_1.PrismaModule,
-            file_module_1.FileModule
+            file_module_1.FileModule,
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.UserEntity]),
         ],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService],

@@ -17,6 +17,9 @@ const throttler_1 = require("@nestjs/throttler");
 const config_1 = require("@nestjs/config");
 const mailer_1 = require("@nestjs-modules/mailer");
 const pug_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/pug.adapter");
+const typeorm_1 = require("@nestjs/typeorm");
+const process = require("process");
+const user_entity_1 = require("./user/entity/user.entity");
 let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([
@@ -49,6 +52,16 @@ exports.AppModule = AppModule = __decorate([
                     },
                 },
             }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'postgres',
+                host: process.env.DB_HOST,
+                port: Number(process.env.DB_PORT),
+                username: process.env.DB_USERNAME,
+                password: process.env.DB_PASSWORD,
+                database: process.env.DB_DATABASE,
+                entities: [user_entity_1.UserEntity],
+                synchronize: process.env.ENV === "development",
+            })
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, {

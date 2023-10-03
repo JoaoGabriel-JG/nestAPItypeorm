@@ -1,4 +1,5 @@
 /// <reference types="multer" />
+/// <reference types="express-serve-static-core" />
 import { AuthLoginDto } from "./dto/auth-login.dto";
 import { AuthRegisterDto } from "./dto/auth-register.dto";
 import { AuthForgetDto } from "./dto/auth-forget.dto";
