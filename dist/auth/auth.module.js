@@ -21,7 +21,7 @@ let AuthModule = exports.AuthModule = class AuthModule {
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [jwt_1.JwtModule.register({
-                secret: process.env.JWT_SECRETs
+                secret: String(process.env.JWT_SECRET)
             }),
             (0, common_1.forwardRef)(() => user_module_1.UserModule),
             file_module_1.FileModule,
